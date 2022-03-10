@@ -70,6 +70,19 @@
 		  	}
 		];
 		
+		embedded_svc.settings.extraPrechatInfo = [{
+				"entityName": "Lead",
+				"showOnCreate": true,
+				"saveToTranscript": "LeadId",
+				"entityFieldMaps": [{
+				  "isExactMatch": false,
+				  "fieldName": "Creado_Manualmente__c",
+				  "doCreate": true,
+				  "doFind": false,
+				  "label": "Creado Manualmente"
+				}]
+			}]
+		
 		embedded_svc.init(
 			'https://grupotagle--uat.my.salesforce.com', // varia segun entorno salesforce
 			'https://uat-tagle.cs219.force.com/liveAgentSetupFlow', // varia segun entorno salesforce
