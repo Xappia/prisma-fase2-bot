@@ -71,20 +71,32 @@
 				"value": false, // No modificar	
 				"displayToAgent": true,	
 				"transcriptFields": ["Creado_Manualmente__c"]	
-		  	}	
-		];	
-			
-		embedded_svc.settings.extraPrechatInfo = [{	
-				"entityName": "Lead",	
-				"showOnCreate": true,	
-				"saveToTranscript": "LeadId",	
-				"entityFieldMaps": [{	
-				  "isExactMatch": false,	
-				  "fieldName": "Creado_Manualmente__c",	
-				  "doCreate": true,	
-				  "doFind": false,	
-				  "label": "Creado Manualmente"	
-				}]	
+		  	},
+			{
+				"label": "Origen del sistema",
+				"value": "Chat", // No modificar
+				"displayToAgent": true,
+				"transcriptFields": ["Origen_del_sistema__c"]
+		  	}
+		];
+		
+		embedded_svc.settings.extraPrechatInfo = [{
+				"entityName": "Lead",
+				"showOnCreate": true,
+				"saveToTranscript": "LeadId",
+				"entityFieldMaps": [{
+				  "isExactMatch": false,
+				  "fieldName": "Creado_Manualmente__c",
+				  "doCreate": true,
+				  "doFind": false,
+				  "label": "Creado Manualmente"
+				},{
+			    	  "isExactMatch": true,
+			    	  "fieldName": "Origen_del_sistema__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "Origen del sistema"
+				}]
 			}];
 		
 		embedded_svc.init(
