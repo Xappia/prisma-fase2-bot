@@ -71,6 +71,12 @@
 				"value": false, // No modificar
 				"displayToAgent": true,
 				"transcriptFields": ["Creado_Manualmente__c"]
+		  	},
+			{
+				"label": "Origen del sistema",
+				"value": "Chat", // No modificar
+				"displayToAgent": true,
+				"transcriptFields": ["Origen_del_sistema__c"]
 		  	}
 		];
 		
@@ -84,6 +90,12 @@
 				  "doCreate": true,
 				  "doFind": false,
 				  "label": "Creado Manualmente"
+				},{
+			    	  "isExactMatch": true,
+			    	  "fieldName": "Origen_del_sistema__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "Origen del sistema"
 				}]
 			}];
 		
