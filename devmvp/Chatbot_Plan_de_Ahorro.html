@@ -2,21 +2,20 @@
 <html>
 	<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(function(){
+				 	document.getElementById('helpButtonSpan').click();
+				}, 3000);
+			   
+			}, false);
+		</script>
 	<style type='text/css'>
-	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #D1030F;
-		font-family: "Salesforce Sans", sans-serif;
-	}
-	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #D1030F;
-	}
 	@font-face {
 		font-family: 'Salesforce Sans';
 		src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
 		url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
 	}
-
-
 	</style>
 
 	</head>
@@ -25,17 +24,56 @@
 	.embeddedServiceHelpButton .helpButton .uiButton {
 		background-color: #005290;
 		font-family: "Arial", sans-serif;
+        min-width: 5em;
+        margin: 0 15px 15px 0;
+        border-radius: 50%;
+        overflow: hidden;
 	}
+
 	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #005290;
+        outline: 1px solid #005290;
+        border-radius: 50%;
+        min-width: 5em;
+        background-image: url("{!URLFOR($Resource.waitChatImage)}");
+        background-repeat: no-repeat;
+        background-position: center;
 	}
+
+    .embeddedServiceHelpButton .helpButton {
+        margin: 0 15px 25px 0;
+
+    }
+    .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before{
+
+    background-color:#00e3c8;
+    text-decoration: none;
+    }
+    .embeddedServiceHelpButton .embeddedServiceIcon {
+        margin: auto;
+        
+    }
+    .embeddedServiceHelpButton .embeddedServiceIcon::before {
+        font-size: 2.5em;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton .helpButtonLabel {
+        display: none;
+    }
+    .embeddedServiceLiveAgentStateChatAvatar.isLightningOutContext .agentIconColor0{
+        background-color: #005290;
+        
+    }
 	</style>
 
 	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 	<script type='text/javascript'>
 	var initESW = function(gslbBaseURL) {
-		embedded_svc.settings.displayHelpButton = true; //O falso
-		embedded_svc.settings.language = ''; //Por ejemplo, introduzca 'en' o 'en-US'
+			embedded_svc.settings.displayHelpButton = true; 
+		//embedded_svc.settings.language = '';
+
+		embedded_svc.settings.defaultMinimizedText = 'Chatea con un asesor'; 
+		embedded_svc.settings.disabledMinimizedText = 'Chatea con un asesor';
+		embedded_svc.settings.offlineSupportMinimizedText = 'Cargando chat';
+		embedded_svc.settings.loadingText = 'Cargando'; 
 
 		embedded_svc.addEventHandler("onChatRequestSuccess", function(data) {
 			gtag_report_conversion();
@@ -43,43 +81,50 @@
 		
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-		embedded_svc.settings.defaultMinimizedText = 'Chatea con un asesor'; //Chata with an expert
-		embedded_svc.settings.disabledMinimizedText = 'Chatea con un asesor'; //Agent offline
-		embedded_svc.settings.offlineSupportMinimizedText = 'Cargando chat';
-		embedded_svc.settings.loadingText = 'Cargando'; //Loading
-		embedded_svc.settings.extraPrechatFormDetails = [
-			{
-				"label": "IdCampaña",
-				"value": "C1", // personalizar por campaña
-				"displayToAgent": true,
-				"transcriptFields": ["Id_Externo_Campana__c"]
-			},
-		  	{
-				"label": "Marca",
-				"value": "FIAT", // personalizar por marca
-				"displayToAgent": true,
-			    "transcriptFields": ["Marca_Pagina__c"]
-		  	},
-		  	{
-				"label": "Empresa",
-				"value": "Motcor", // personalizar por empresa
-				"displayToAgent": true,
-				"transcriptFields": ["Empresa__c"]
-		  	},
-		  	{
-				"label": "Creado Manualmente",
-				"value": false, // No modificar
-				"displayToAgent": true,
-				"transcriptFields": ["Creado_Manualmente__c"]
-		  	},
-			{
-				"label": "Origen del sistema",
-				"value": "Chat", // No modificar
-				"displayToAgent": true,
-				"transcriptFields": ["Origen_del_sistema__c"]
-		  	}
-		];
 		
+		embedded_svc.settings.extraPrechatFormDetails = [
+		   {
+		 "label": "IdCampaña",
+		 "value": "C1",//valor por default
+		 "displayToAgent": true,
+		 "transcriptFields": ["Id_Externo_Campana__c"]},
+		 {
+		 "label": "Marca",
+		 "value": "FIAT",
+		 "displayToAgent": true,
+		 "transcriptFields": ["Marca_Pagina__c"]},
+		 {
+		 "label": "Empresa",
+		 "value": "Motcor",
+		 "displayToAgent": true,
+		 "transcriptFields": ["Empresa__c"]},
+		{
+		 "label": "Tipo de origen",
+		 "value": "Marketplace",
+		 "displayToAgent": true,
+		 "transcriptFields": ["Tipo_de_origen__c"]},
+		{
+		 "label": "Origen",
+		 "value": "Mercado Libre",
+		 "displayToAgent": true,
+		 "transcriptFields": ["Origen__c"]},
+		{
+		 "label": "utm_campaing",
+		 "value": "banner_cadena3",
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_campaing__c"]},
+		{
+		 "label": "utm_medium",
+		 "value": "banner300x250",
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_medium__c"]},
+		 {
+		 "label": "utm_source",
+		 "value": "banner_cadena3",
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_source__c"]},
+		 ];
+
 		embedded_svc.settings.extraPrechatInfo = [{
 				"entityName": "Lead",
 				"showOnCreate": true,
