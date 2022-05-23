@@ -6,7 +6,7 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				setTimeout(function(){
 				 	document.getElementById('helpButtonSpan').click();
-				}, 3000);
+				}, 5000);
 			   
 			}, false);
 		</script>
@@ -26,15 +26,18 @@
 		font-family: "Arial", sans-serif;
         min-width: 5em;
         margin: 0 15px 15px 0;
-        border-radius: 50%;
+        border-radius: 40%;
         overflow: hidden;
+	background-image: url("https://devmvp-grupotagle.cs222.force.com/liveAgentSetupFlow/resource/1652892757000/waitChatImage");
+        background-repeat: no-repeat;
+        background-position: center;
 	}
 
 	.embeddedServiceHelpButton .helpButton .uiButton:focus {
         outline: 1px solid #005290;
-        border-radius: 50%;
+        border-radius: 40%;
         min-width: 5em;
-        background-image: url("{!URLFOR($Resource.waitChatImage)}");
+        background-image: url("https://devmvp-grupotagle.cs222.force.com/liveAgentSetupFlow/resource/1652892757000/waitChatImage");
         background-repeat: no-repeat;
         background-position: center;
 	}
