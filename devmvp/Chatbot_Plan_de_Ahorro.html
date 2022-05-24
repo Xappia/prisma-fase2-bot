@@ -69,6 +69,15 @@
 
 	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 	<script type='text/javascript'>
+		 const params = new Proxy(new URLSearchParams(window.location.search), {
+		  get: (searchParams, prop) => searchParams.get(prop),
+		});
+		// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+		let utmCampaign = params.utm_campaign;
+		let utmMedium = params.utm_medium;
+		let utmSource = params.utm_source;
+		
+		
 	var initESW = function(gslbBaseURL) {
 			embedded_svc.settings.displayHelpButton = true; 
 		//embedded_svc.settings.language = '';
@@ -113,17 +122,17 @@
 		 "transcriptFields": ["Origen__c"]},
 		{
 		 "label": "utm_campaing",
-		 "value": "banner_cadena3",
+		 "value": utmCampaign,
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_campaing__c"]},
 		{
 		 "label": "utm_medium",
-		 "value": "banner300x250",
+		 "value": utmMedium,
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_medium__c"]},
 		 {
 		 "label": "utm_source",
-		 "value": "banner_cadena3",
+		 "value": utmSource,
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_source__c"]},
 		 ];
@@ -144,7 +153,24 @@
 			    	  "doCreate": true,
 			    	  "doFind": true,
 			    	  "label": "Origen del sistema"
-				}]
+				},{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_campaing__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_campaing"},
+                      		{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_medium__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_medium"},
+                      		{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_source__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_source"}]
 			}];
 		
 		embedded_svc.init(
