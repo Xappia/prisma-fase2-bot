@@ -51,7 +51,7 @@
     }
 
     .embeddedServiceHelpButton .embeddedServiceIcon {
-	    display:none!important;
+	display:none!important;
         margin: auto;
     }
     .embeddedServiceHelpButton .embeddedServiceIcon::before {
@@ -71,15 +71,14 @@
 		 const params = new Proxy(new URLSearchParams(window.location.search), {
 		  get: (searchParams, prop) => searchParams.get(prop),
 		});
-		// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
 		let utmCampaign = params.utm_campaign;
 		let utmMedium = params.utm_medium;
 		let utmSource = params.utm_source;
 		let utm = window.location.hostname;
 		
 		
-	var initESW = function(gslbBaseURL) {
-			embedded_svc.settings.displayHelpButton = true; 
+		var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; 
 		//embedded_svc.settings.language = '';
 
 		embedded_svc.settings.defaultMinimizedText = 'Chatea con un asesor'; 
@@ -122,22 +121,22 @@
 		 "transcriptFields": ["Origen_del_sistema__c"]},
 		{
 		 "label": "utm",
-		 "value": utm,
+		 "value": utm, // No modificar
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm__c"]},
 		{
 		 "label": "utm_campaing",
-		 "value": utmCampaign,
+		 "value": utmCampaign, // No modificar
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_campaing__c"]},
 		{
 		 "label": "utm_medium",
-		 "value": utmMedium,
+		 "value": utmMedium, // No modificar
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_medium__c"]},
 		 {
 		 "label": "utm_source",
-		 "value": utmSource,
+		 "value": utmSource, // No modificar
 		 "displayToAgent": false,
 		 "transcriptFields": ["utm_source__c"]},
 		 ];
