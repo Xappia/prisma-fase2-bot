@@ -2,40 +2,89 @@
 <html>
 	<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(function(){
+				 	document.getElementById('helpButtonSpan').click();
+				}, 3000);
+			   
+			}, false);
+		</script>
 	<style type='text/css'>
-	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #D1030F;
-		font-family: "Salesforce Sans", sans-serif;
-	}
-	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #D1030F;
-	}
 	@font-face {
 		font-family: 'Salesforce Sans';
 		src: url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.woff') format('woff'),
 		url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
 	}
-
-
 	</style>
 
 	</head>
 	<body>
 	<style type='text/css'>
 	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #005290;
-		font-family: "Arial", sans-serif;
+	background-color: #005290;
+	font-family: "Arial", sans-serif;
+        min-width: 4.2em;
+	min-height: 3.9em;
+        margin: 0 15px 15px 0;
+        border-radius: 50%;
+        overflow: hidden;
+	background-image: url("https://uatmvp-grupotagle.cs224.force.com/liveAgentSetupFlow/resource/chatImage");
+        background-repeat: no-repeat;
+        background-position: center;
+	background-size: 35px 35px;
 	}
+
 	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #005290;
+        outline: 1px solid #005290;
+        border-radius: 50%;
+        min-width: 4.2em;
+        background-image: url("https://uatmvp-grupotagle.cs224.force.com/liveAgentSetupFlow/resource/waitChatImage");
+        background-repeat: no-repeat;
+        background-position: center;
+	background-size: 25px 25px;
 	}
+
+    .embeddedServiceHelpButton .helpButton {
+        margin: 0 15px 25px 0;
+
+    }
+
+    .embeddedServiceHelpButton .embeddedServiceIcon {
+	display:none!important;
+        margin: auto;
+    }
+    .embeddedServiceHelpButton .embeddedServiceIcon::before {
+        font-size: 2.5em;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton .helpButtonLabel {
+        display: none;
+    }
+    .embeddedServiceLiveAgentStateChatAvatar.isLightningOutContext .agentIconColor0{
+        background-color: #005290;
+        
+    }
 	</style>
 
 	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 	<script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
-		embedded_svc.settings.displayHelpButton = true; //O falso
-		embedded_svc.settings.language = ''; //Por ejemplo, introduzca 'en' o 'en-US'
+		 const params = new Proxy(new URLSearchParams(window.location.search), {
+		  get: (searchParams, prop) => searchParams.get(prop),
+		});
+		let utmCampaign = params.utm_campaign;
+		let utmMedium = params.utm_medium;
+		let utmSource = params.utm_source;
+		let utm = window.location.hostname;
+		
+		
+		var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; 
+		//embedded_svc.settings.language = '';
+
+		embedded_svc.settings.defaultMinimizedText = 'Chatea con un asesor'; 
+		embedded_svc.settings.disabledMinimizedText = 'Chatea con un asesor';
+		embedded_svc.settings.offlineSupportMinimizedText = 'Cargando chat';
+		embedded_svc.settings.loadingText = 'Cargando'; 
 
 		embedded_svc.addEventHandler("onChatRequestSuccess", function(data) {
 			gtag_report_conversion();
@@ -43,43 +92,55 @@
 		
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-		embedded_svc.settings.defaultMinimizedText = 'Chatea con un asesor'; //Chata with an expert
-		embedded_svc.settings.disabledMinimizedText = 'Chatea con un asesor'; //Agent offline
-		embedded_svc.settings.offlineSupportMinimizedText = 'Cargando chat';
-		embedded_svc.settings.loadingText = 'Cargando'; //Loading
+		//embedded_svc.settings.smallCompanyLogoImgURL = 'https://uatmvp-grupotagle.cs224.force.com/liveAgentSetupFlow/resource/1653573068000/waitChatImage';
 		embedded_svc.settings.extraPrechatFormDetails = [
-			{
-				"label": "IdCampaña",
-				"value": "C1", // personalizar por campaña
-				"displayToAgent": true,
-				"transcriptFields": ["Id_Externo_Campana__c"]
-			},
-		  	{
-				"label": "Marca",
-				"value": "FIAT", // personalizar por marca
-				"displayToAgent": true,
-			    "transcriptFields": ["Marca_Pagina__c"]
-		  	},
-		  	{
-				"label": "Empresa",
-				"value": "Motcor", // personalizar por empresa
-				"displayToAgent": true,
-				"transcriptFields": ["Empresa__c"]
-		  	},
-		  	{
-				"label": "Creado Manualmente",
-				"value": false, // No modificar
-				"displayToAgent": true,
-				"transcriptFields": ["Creado_Manualmente__c"]
-		  	},
-			{
-				"label": "Origen del sistema",
-				"value": "Chat", // No modificar
-				"displayToAgent": true,
-				"transcriptFields": ["Origen_del_sistema__c"]
-		  	}
-		];
-		
+		   {
+		 "label": "IdCampaña",
+		 "value": "C1",  // personalizar por campaña
+		 "displayToAgent": true,
+		 "transcriptFields": ["Id_Externo_Campana__c"]},
+		 {
+		 "label": "Marca",
+		 "value": "FIAT", // personalizar por marca
+		 "displayToAgent": true,
+		 "transcriptFields": ["Marca_Pagina__c"]},
+		 {
+		 "label": "Empresa",
+		 "value": "Motcor", // personalizar por empresa
+		 "displayToAgent": true,
+		 "transcriptFields": ["Empresa__c"]},
+		{
+		 "label": "Creado Manualmente",
+		 "value": false, // No modificar
+		 "displayToAgent": true,
+		 "transcriptFields": ["Creado_Manualmente__c"]},
+		{
+		 "label": "Origen del sistema",
+		 "value": "Chat", // No modificar
+		 "displayToAgent": true,
+		 "transcriptFields": ["Origen_del_sistema__c"]},
+		{
+		 "label": "utm",
+		 "value": utm, // No modificar
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm__c"]},
+		{
+		 "label": "utm_campaing",
+		 "value": utmCampaign, // No modificar
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_campaing__c"]},
+		{
+		 "label": "utm_medium",
+		 "value": utmMedium, // No modificar
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_medium__c"]},
+		 {
+		 "label": "utm_source",
+		 "value": utmSource, // No modificar
+		 "displayToAgent": false,
+		 "transcriptFields": ["utm_source__c"]},
+		 ];
+
 		embedded_svc.settings.extraPrechatInfo = [{
 				"entityName": "Lead",
 				"showOnCreate": true,
@@ -96,9 +157,32 @@
 			    	  "doCreate": true,
 			    	  "doFind": true,
 			    	  "label": "Origen del sistema"
-				}]
+				},{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm"},
+				{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_campaing__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_campaing"},
+                      		{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_medium__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_medium"},
+                      		{
+                    		"isExactMatch": true,
+			    	  "fieldName": "utm_source__c",
+			    	  "doCreate": true,
+			    	  "doFind": true,
+			    	  "label": "utm_source"}]
 			}];
-		
+			
 		embedded_svc.init(
 			'https://grupotagle--uatmvp.my.salesforce.com', // varia segun entorno salesforce
 			'https://uatmvp-grupotagle.cs224.force.com/liveAgentSetupFlow', // varia segun entorno salesforce
