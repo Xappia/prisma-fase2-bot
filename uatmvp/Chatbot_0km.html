@@ -184,17 +184,17 @@
 			}];
 		
 		embedded_svc.init(
-			'https://grupotagle--uatmvp.sandbox.my.salesforce.com', // varia segun entorno salesforce
-			'https://grupotagle--uatmvp.sandbox.my.salesforce-sites.com/liveAgentSetupFlow', // varia segun entorno salesforce
+			'https://grupotagle--uatmvp.sandbox.my.salesforce.com',
+			'https://grupotagle--uatmvp.sandbox.my.salesforce-sites.com/liveAgentSetupFlow',
 			gslbBaseURL,
-			'00D8L0000008jMj', // varia segun entorno salesforce
-			'Chat_Bot_0km', // varia segun tipo de registro
+			'00D8L0000008jMj',
+			'Chat_Bot_0km',
 			{
-				baseLiveAgentContentURL: 'https://c.la4-c1cs-ia5.salesforceliveagent.com/content', // varia segun entorno salesforce
-				deploymentId: '5727V000000oLkj', // varia segun entorno salesforce
-				buttonId: '5737V000000sXtg', // varia segun entorno salesforce
-				baseLiveAgentURL: 'https://d.la4-c1cs-ia5.salesforceliveagent.com/chat', // varia segun entorno salesforce
-				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7V000000k9bxUAA_17fe1f58530', // varia segun tipo de registro
+				baseLiveAgentContentURL: 'https://c.la4-c1cs-ia5.salesforceliveagent.com/content',
+				deploymentId: '5727V000000oLkj',
+				buttonId: '5737V000000sXtg',
+				baseLiveAgentURL: 'https://d.la4-c1cs-ia5.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7V000000k9bxUAA_17fe1f58530',
 				isOfflineSupportEnabled: false
 			}
 		);
@@ -202,7 +202,7 @@
 
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
-		s.setAttribute('src', 'https://grupotagle--uatmvp.my.salesforce.com/embeddedservice/5.0/esw.min.js'); // varia segun entorno salesforce
+		s.setAttribute('src', 'https://grupotagle--uatmvp.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
 			initESW(null);
 		};
